@@ -3,11 +3,22 @@ import TodoItem from './TodoItem'
 
 export default class TodoList extends Component {
     render() {
+        const {items, handleDelete, handleEdit, clearList} = this.props
         return (
-            <div>
-                <h2>Todo List</h2>
-                <TodoItem />
-            </div>
+            
+            <ul className="list-group my-5">
+                <h3 className="text-capitalize text-center">
+                Todo list
+                </h3>
+                {
+                    items.map(item => {
+                        return (
+                            <TodoItem key={item.id} title={item.title} handleDelete={()=>{handleDelete(item.id)}} clearList={clearList} handleEdit={()=>{handleEdit(item.id)}}/>
+                        )
+                    })
+                }
+                <button className='btn btn-danger btn-block text-uppercase mt-5' onClick={clearList}>clear list</button>
+            </ul>
         )
     }
 }
